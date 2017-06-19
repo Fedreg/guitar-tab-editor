@@ -1,0 +1,376 @@
+var _user$project$Main$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
+var _user$project$Main$noteXpos = function (a) {
+	var _p0 = a;
+	switch (_p0) {
+		case 1:
+			return '-2px';
+		case 2:
+			return '15px';
+		case 3:
+			return '32px';
+		case 4:
+			return '49px';
+		case 5:
+			return '66px';
+		case 6:
+			return '83px';
+		default:
+			return '0';
+	}
+};
+var _user$project$Main$tabLines = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$style(
+			{
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'marginTop', _1: '50px'},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'position', _1: 'relative'},
+					_1: {ctor: '[]'}
+				}
+			}),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$hr,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$style(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'border', _1: '1px solid #333'},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'marginTop', _1: '15px'},
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			},
+			{ctor: '[]'}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$hr,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$style(
+						{
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'border', _1: '1px solid #333'},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'marginTop', _1: '15px'},
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$hr,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$style(
+							{
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'border', _1: '1px solid #333'},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'marginTop', _1: '15px'},
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$hr,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$style(
+								{
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'border', _1: '1px solid #333'},
+									_1: {
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 'marginTop', _1: '15px'},
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {ctor: '[]'}
+						},
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$hr,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$style(
+									{
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 'border', _1: '1px solid #333'},
+										_1: {
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: 'marginTop', _1: '15px'},
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {ctor: '[]'}
+							},
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$hr,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$style(
+										{
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: 'border', _1: '1px solid #333'},
+											_1: {
+												ctor: '::',
+												_0: {ctor: '_Tuple2', _0: 'marginTop', _1: '15px'},
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {ctor: '[]'}
+								},
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		}
+	});
+var _user$project$Main$tabNotes = F2(
+	function (tabList, width) {
+		var tabItem = function (a) {
+			var fret = _elm_lang$core$Native_Utils.eq(a.fret, 99) ? '' : _elm_lang$core$Basics$toString(a.fret);
+			return A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$style(
+						{
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'position', _1: 'relative'},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'marginTop',
+									_1: _user$project$Main$noteXpos(a.string)
+								},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'marginRight', _1: '10px'},
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(fret),
+					_1: {ctor: '[]'}
+				});
+		};
+		var tabHtmlList = {ctor: '[]'};
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$style(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'display', _1: 'flex'},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'marginTop', _1: '-100px'},
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			},
+			A2(_elm_lang$core$List$map, tabItem, tabList));
+	});
+var _user$project$Main$init = A2(
+	_elm_lang$core$Platform_Cmd_ops['!'],
+	{
+		processedNotes: {ctor: '[]'},
+		enteredNotes: {ctor: '[]'},
+		tabXpos: 0,
+		tabYpos: 0
+	},
+	{ctor: '[]'});
+var _user$project$Main$Model = F4(
+	function (a, b, c, d) {
+		return {processedNotes: a, enteredNotes: b, tabXpos: c, tabYpos: d};
+	});
+var _user$project$Main$TabEntry = F2(
+	function (a, b) {
+		return {fret: a, string: b};
+	});
+var _user$project$Main$splitByString = function (notes) {
+	var noteList = A2(
+		_elm_lang$core$List$map,
+		_elm_lang$core$Result$withDefault(99),
+		A2(
+			_elm_lang$core$List$map,
+			_elm_lang$core$String$toInt,
+			A2(
+				_elm_lang$core$List$drop,
+				1,
+				A2(_elm_lang$core$String$split, ' ', notes))));
+	var stringNo = A2(
+		_elm_lang$core$List$repeat,
+		_elm_lang$core$List$length(noteList),
+		A2(
+			_elm_lang$core$Result$withDefault,
+			1,
+			_elm_lang$core$String$toInt(
+				A3(_elm_lang$core$String$slice, 0, 1, notes))));
+	return A3(_elm_lang$core$List$map2, _user$project$Main$TabEntry, noteList, stringNo);
+};
+var _user$project$Main$parseInput = function (noteList) {
+	return _elm_lang$core$List$concat(
+		A2(_elm_lang$core$List$map, _user$project$Main$splitByString, noteList));
+};
+var _user$project$Main$update = F2(
+	function (msg, model) {
+		var _p1 = msg;
+		switch (_p1.ctor) {
+			case 'NewStaff':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{tabXpos: model.tabXpos + 200}),
+					{ctor: '[]'});
+			case 'ReadTab':
+				var yPos = model.tabYpos + 20;
+				var readNotes = A2(_elm_lang$core$String$split, ', ', _p1._0);
+				var parsedNotes = _user$project$Main$parseInput(readNotes);
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{enteredNotes: readNotes, processedNotes: parsedNotes, tabYpos: yPos}),
+					{ctor: '[]'});
+			default:
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							enteredNotes: {ctor: '[]'}
+						}),
+					{ctor: '[]'});
+		}
+	});
+var _user$project$Main$ReadTab = function (a) {
+	return {ctor: 'ReadTab', _0: a};
+};
+var _user$project$Main$tabInput = A2(
+	_elm_lang$html$Html$input,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$type_('text'),
+		_1: {
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$placeholder('Enter Tab'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$ReadTab),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$style(
+						{
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'display', _1: 'inline'},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'width', _1: '40%'},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'textAlign', _1: 'center'},
+									_1: {
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 'margin', _1: '100px 0 0 25%'},
+										_1: {
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: 'backgroundColor', _1: 'none'},
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		}
+	},
+	{ctor: '[]'});
+var _user$project$Main$NewStaff = {ctor: 'NewStaff'};
+var _user$project$Main$ClearTab = {ctor: 'ClearTab'};
+var _user$project$Main$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$style(
+				{
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'color', _1: '#fff'},
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _user$project$Main$tabInput,
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$button,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$ClearTab),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('Delete All'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Main$tabLines,
+					_1: {
+						ctor: '::',
+						_0: A2(_user$project$Main$tabNotes, model.processedNotes, model.tabYpos),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _user$project$Main$main = _elm_lang$html$Html$program(
+	{init: _user$project$Main$init, view: _user$project$Main$view, update: _user$project$Main$update, subscriptions: _user$project$Main$subscriptions})();
