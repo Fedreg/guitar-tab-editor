@@ -78,6 +78,7 @@ view model =
         , clearButton
         , tabLines
         , tabNotes model.processedNotes
+        , instructions
         ]
 
 
@@ -95,6 +96,8 @@ tabNotes tabList =
                         div [ style [ ( "color", "rgba(0,0,0,0)" ) ] ] [ text "-" ]
                     else if note.string == 9 then
                         div [ style [ ( "height", "85px" ), ( "border", "1px solid #333" ), ( "zIndex", "1" ), ( "margin", "5px 5px 0 15px" ) ] ] []
+                    else if note.string == 8 then
+                        div [ style [ ( "height", "85px" ), ( "width", "3px" ), ( "borderLeft", "2px solid #333" ), ( "borderRight", "2px solid #333" ), ( "zIndex", "1" ), ( "margin", "5px 5px 0 15px" ) ] ] []
                     else
                         div [ style [ ( "position", "relative" ), ( "marginTop", (noteXpos note.string) ), ( "marginLeft", "10px" ) ] ] [ text <| toString note.fret ]
             else
@@ -103,12 +106,12 @@ tabNotes tabList =
                         if b.fret == 50 then
                             div [] []
                         else
-                            div [ style [ ( "margin", "-3px 0 0 10px" ) ] ] [ text <| toString b.fret ]
+                            div [ style [ ( "margin", "-1px 0 0 10px" ) ] ] [ text <| toString b.fret ]
 
                     finalDiv =
                         List.map mapper a
                 in
-                    div [ style [ ( "position", "relative" ) ] ] finalDiv
+                    div [ style [ ( "position", "relative" ) ] ] (List.reverse finalDiv)
     in
         div [ style [ ( "display", "flex" ), ( "marginTop", "-100px" ) ] ]
             (List.map tabItem tabList)
@@ -222,6 +225,18 @@ noteXpos a =
 
         _ ->
             "0"
+
+
+instructions =
+    ul [ style [ ( "position", "absolute" ), ( "bottom", "5%" ), ( "left", "25%" ), ( "width", "60%" ), ( "textAlign", "left" ), ( "color", "#333" ) ] ]
+        [ li [] [ text "type string number directly followed by fret number, followed by a space, ex: 10 21 33 11, etc" ]
+        , li [] [ text "type space as many times as desired to add spacing between notes." ]
+        , li [] [ text "for chords type all 6 string number/fret number sets together. ex: G major = 635240302313" ]
+        , li [] [ text "for chords with fewer than 6 strings use xx for string/fret. ex: D major = xxxx40322312" ]
+        , li [] [ text "type 99 for a barline." ]
+        , li [] [ text "type 88 for a double barline." ]
+        , li [] [ text "Experimental, more coming soon!" ]
+        ]
 
 
 subscriptions model =

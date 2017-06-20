@@ -8263,6 +8263,116 @@ var _elm_lang$html$Html_Events$Options = F2(
 var _user$project$Main$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$none;
 };
+var _user$project$Main$instructions = A2(
+	_elm_lang$html$Html$ul,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$style(
+			{
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'position', _1: 'absolute'},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'bottom', _1: '5%'},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'left', _1: '25%'},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'width', _1: '60%'},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'textAlign', _1: 'left'},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'color', _1: '#333'},
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			}),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$li,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('type string number directly followed by fret number, followed by a space, ex: 10 21 33 11, etc'),
+				_1: {ctor: '[]'}
+			}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$li,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('type space as many times as desired to add spacing between notes.'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$li,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('for chords type all 6 string number/fret number sets together. ex: G major = 635240302313'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$li,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('for chords with fewer than 6 strings use xx for string/fret. ex: D major = xxxx40322312'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$li,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('type 99 for a barline.'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$li,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('type 88 for a double barline.'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$li,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Experimental, more coming soon!'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}
+		}
+	});
 var _user$project$Main$noteXpos = function (a) {
 	var _p0 = a;
 	switch (_p0) {
@@ -8515,6 +8625,38 @@ var _user$project$Main$tabNotes = function (tabList) {
 						}),
 					_1: {ctor: '[]'}
 				},
+				{ctor: '[]'}) : (_elm_lang$core$Native_Utils.eq(note.string, 8) ? A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$style(
+						{
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'height', _1: '85px'},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'width', _1: '3px'},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'borderLeft', _1: '2px solid #333'},
+									_1: {
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 'borderRight', _1: '2px solid #333'},
+										_1: {
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: 'zIndex', _1: '1'},
+											_1: {
+												ctor: '::',
+												_0: {ctor: '_Tuple2', _0: 'margin', _1: '5px 5px 0 15px'},
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				},
 				{ctor: '[]'}) : A2(
 				_elm_lang$html$Html$div,
 				{
@@ -8544,7 +8686,7 @@ var _user$project$Main$tabNotes = function (tabList) {
 					_0: _elm_lang$html$Html$text(
 						_elm_lang$core$Basics$toString(note.fret)),
 					_1: {ctor: '[]'}
-				}));
+				})));
 		} else {
 			var mapper = function (b) {
 				return _elm_lang$core$Native_Utils.eq(b.fret, 50) ? A2(
@@ -8557,7 +8699,7 @@ var _user$project$Main$tabNotes = function (tabList) {
 						_0: _elm_lang$html$Html_Attributes$style(
 							{
 								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'margin', _1: '-3px 0 0 10px'},
+								_0: {ctor: '_Tuple2', _0: 'margin', _1: '-1px 0 0 10px'},
 								_1: {ctor: '[]'}
 							}),
 						_1: {ctor: '[]'}
@@ -8582,7 +8724,7 @@ var _user$project$Main$tabNotes = function (tabList) {
 						}),
 					_1: {ctor: '[]'}
 				},
-				finalDiv);
+				_elm_lang$core$List$reverse(finalDiv));
 		}
 	};
 	return A2(
@@ -8791,7 +8933,11 @@ var _user$project$Main$view = function (model) {
 					_1: {
 						ctor: '::',
 						_0: _user$project$Main$tabNotes(model.processedNotes),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: _user$project$Main$instructions,
+							_1: {ctor: '[]'}
+						}
 					}
 				}
 			}
