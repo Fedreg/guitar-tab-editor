@@ -8296,6 +8296,39 @@ var _user$project$Main$fretNo = function (a) {
 		_elm_lang$core$String$toInt(
 			A2(_elm_lang$core$String$dropLeft, 1, a)));
 };
+var _user$project$Main$clearButton = A2(
+	_elm_lang$html$Html$button,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$style(
+			{
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'backgroundColor', _1: '#222'},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'color', _1: '#03a9f4'},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'border', _1: '1px solid #333'},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'marginTop', _1: '10px'},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'padding', _1: '10px'},
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html$text('Clear Tab'),
+		_1: {ctor: '[]'}
+	});
 var _user$project$Main$tabLines = A2(
 	_elm_lang$html$Html$div,
 	{
@@ -8524,20 +8557,8 @@ var _user$project$Main$tabNotes = function (tabList) {
 						_0: _elm_lang$html$Html_Attributes$style(
 							{
 								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'position', _1: 'absolute'},
-								_1: {
-									ctor: '::',
-									_0: {
-										ctor: '_Tuple2',
-										_0: 'top',
-										_1: _user$project$Main$noteXpos(b.string)
-									},
-									_1: {
-										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'left', _1: '10px'},
-										_1: {ctor: '[]'}
-									}
-								}
+								_0: {ctor: '_Tuple2', _0: 'margin', _1: '-3px 0 0 10px'},
+								_1: {ctor: '[]'}
 							}),
 						_1: {ctor: '[]'}
 					},
@@ -8693,48 +8714,54 @@ var _user$project$Main$ReadTab = function (a) {
 	return {ctor: 'ReadTab', _0: a};
 };
 var _user$project$Main$tabInput = A2(
-	_elm_lang$html$Html$input,
+	_elm_lang$html$Html$textarea,
 	{
 		ctor: '::',
-		_0: _elm_lang$html$Html_Attributes$type_('text'),
+		_0: _elm_lang$html$Html_Attributes$placeholder('Enter Tab'),
 		_1: {
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$placeholder('Enter Tab'),
+			_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$ReadTab),
 			_1: {
 				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$ReadTab),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$style(
-						{
+				_0: _elm_lang$html$Html_Attributes$style(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'width', _1: '60%'},
+						_1: {
 							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'display', _1: 'inline'},
+							_0: {ctor: '_Tuple2', _0: 'height', _1: '100px'},
 							_1: {
 								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'width', _1: '40%'},
+								_0: {ctor: '_Tuple2', _0: 'textAlign', _1: 'center'},
 								_1: {
 									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'textAlign', _1: 'center'},
+									_0: {ctor: '_Tuple2', _0: 'margin', _1: '100px 20% 0'},
 									_1: {
 										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'margin', _1: '100px 0 0 25%'},
+										_0: {ctor: '_Tuple2', _0: 'backgroundColor', _1: '#111'},
 										_1: {
 											ctor: '::',
-											_0: {ctor: '_Tuple2', _0: 'backgroundColor', _1: 'none'},
-											_1: {ctor: '[]'}
+											_0: {ctor: '_Tuple2', _0: 'color', _1: '#03a9f4'},
+											_1: {
+												ctor: '::',
+												_0: {ctor: '_Tuple2', _0: 'border', _1: '1px solid #333'},
+												_1: {
+													ctor: '::',
+													_0: {ctor: '_Tuple2', _0: 'fontSize', _1: '16px'},
+													_1: {ctor: '[]'}
+												}
+											}
 										}
 									}
 								}
 							}
-						}),
-					_1: {ctor: '[]'}
-				}
+						}
+					}),
+				_1: {ctor: '[]'}
 			}
 		}
 	},
 	{ctor: '[]'});
-var _user$project$Main$NewStaff = {ctor: 'NewStaff'};
-var _user$project$Main$ClearTab = {ctor: 'ClearTab'};
 var _user$project$Main$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -8744,7 +8771,11 @@ var _user$project$Main$view = function (model) {
 				{
 					ctor: '::',
 					_0: {ctor: '_Tuple2', _0: 'color', _1: '#fff'},
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'textAlign', _1: 'center'},
+						_1: {ctor: '[]'}
+					}
 				}),
 			_1: {ctor: '[]'}
 		},
@@ -8753,18 +8784,7 @@ var _user$project$Main$view = function (model) {
 			_0: _user$project$Main$tabInput,
 			_1: {
 				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$button,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$ClearTab),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text('Delete All'),
-						_1: {ctor: '[]'}
-					}),
+				_0: _user$project$Main$clearButton,
 				_1: {
 					ctor: '::',
 					_0: _user$project$Main$tabLines,
@@ -8779,6 +8799,8 @@ var _user$project$Main$view = function (model) {
 };
 var _user$project$Main$main = _elm_lang$html$Html$program(
 	{init: _user$project$Main$init, view: _user$project$Main$view, update: _user$project$Main$update, subscriptions: _user$project$Main$subscriptions})();
+var _user$project$Main$NewStaff = {ctor: 'NewStaff'};
+var _user$project$Main$ClearTab = {ctor: 'ClearTab'};
 
 var Elm = {};
 Elm['Main'] = Elm['Main'] || {};

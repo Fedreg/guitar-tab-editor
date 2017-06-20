@@ -73,9 +73,9 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div [ style [ ( "color", "#fff" ) ] ]
+    div [ style [ ( "color", "#fff" ), ( "textAlign", "center" ) ] ]
         [ tabInput
-        , button [ onClick ClearTab ] [ text "Delete All" ]
+        , clearButton
         , tabLines
         , tabNotes model.processedNotes
         ]
@@ -103,7 +103,7 @@ tabNotes tabList =
                         if b.fret == 50 then
                             div [] []
                         else
-                            div [ style [ ( "position", "absolute" ), ( "top", (noteXpos b.string) ), ( "left", "10px" ) ] ] [ text <| toString b.fret ]
+                            div [ style [ ( "margin", "-3px 0 0 10px" ) ] ] [ text <| toString b.fret ]
 
                     finalDiv =
                         List.map mapper a
@@ -128,19 +128,26 @@ tabLines =
 
 tabInput : Html Msg
 tabInput =
-    input
-        [ type_ "text"
-        , placeholder "Enter Tab"
+    textarea
+        [ placeholder "Enter Tab"
         , onInput ReadTab
         , style
-            [ ( "display", "inline" )
-            , ( "width", "40%" )
+            [ ( "width", "60%" )
+            , ( "height", "100px" )
             , ( "textAlign", "center" )
-            , ( "margin", "100px 0 0 25%" )
-            , ( "backgroundColor", "none" )
+            , ( "margin", "100px 20% 0" )
+            , ( "backgroundColor", "#111" )
+            , ( "color", "#03a9f4" )
+            , ( "border", "1px solid #333" )
+            , ( "fontSize", "16px" )
             ]
         ]
         []
+
+
+clearButton : Html Msg
+clearButton =
+    button [ style [ ( "backgroundColor", "#222" ), ( "color", "#03a9f4" ), ( "border", "1px solid #333" ), ( "marginTop", "10px" ), ( "padding", "10px" ) ] ] [ text "Clear Tab" ]
 
 
 parseInput : List String -> List (List Tab)
