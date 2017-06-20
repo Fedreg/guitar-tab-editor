@@ -53,7 +53,7 @@ update msg model =
         ReadTab notes ->
             let
                 readNotes =
-                    String.split ", " notes
+                    String.split " " notes
 
                 parsedNotes =
                     parseInput readNotes
@@ -65,7 +65,7 @@ update msg model =
                     ! []
 
         ClearTab ->
-            { model | enteredNotes = [] } ! []
+            { model | processedNotes = [] } ! []
 
 
 view model =
@@ -73,24 +73,23 @@ view model =
         [ tabInput
         , button [ onClick ClearTab ] [ text "Delete All" ]
         , tabLines
-        , tabNotes model.processedNotes model.tabYpos
+        , tabNotes model.processedNotes
+        , div [ style [ ( "marginTop", "100px" ) ] ] [ text <| toString model.enteredNotes ]
         ]
 
 
-tabNotes tabList width =
+tabNotes tabList =
     let
         tabHtmlList =
             []
 
         tabItem a =
-            let
-                fret =
-                    if a.fret == 99 then
-                        ""
-                    else
-                        toString a.fret
-            in
-                div [ style [ ( "position", "relative" ), ( "marginTop", (noteXpos a.string) ), ( "marginRight", "10px" ) ] ] [ text <| fret ]
+            if a.fret == 50 then
+                div [ style [ ( "color", "rgba(0,0,0,0)" ) ] ] [ text "-" ]
+            else if a.string == 9 then
+                div [ style [ ( "height", "85px" ), ( "border", "1px solid #333" ), ( "zIndex", "1" ), ( "margin", "5px 5px 0 15px" ) ] ] []
+            else
+                div [ style [ ( "position", "relative" ), ( "marginTop", (noteXpos a.string) ), ( "marginLeft", "10px" ) ] ] [ text <| toString a.fret ]
     in
         div [ style [ ( "display", "flex" ), ( "marginTop", "-100px" ) ] ]
             (List.map tabItem tabList)
@@ -124,25 +123,22 @@ tabInput =
 
 
 parseInput noteList =
-    List.map splitByString noteList
-        |> List.concat
+    List.map splitNotes noteList
 
 
-splitByString notes =
+splitNotes note =
     let
-        noteList =
-            String.split " " notes
-                |> List.drop 1
-                |> List.map String.toInt
-                |> List.map (Result.withDefault 99)
+        fretNo =
+            String.dropLeft 1 note
+                |> String.toInt
+                |> Result.withDefault 50
 
         stringNo =
-            String.slice 0 1 notes
+            String.left 1 note
                 |> String.toInt
-                |> Result.withDefault 1
-                |> List.repeat (List.length noteList)
+                |> Result.withDefault 0
     in
-        List.map2 TabEntry noteList stringNo
+        TabEntry fretNo stringNo
 
 
 noteXpos a =
