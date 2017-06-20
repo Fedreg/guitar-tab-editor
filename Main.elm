@@ -3,7 +3,6 @@ module Main exposing (..)
 import Html exposing (..)
 import Html.Events exposing (..)
 import Html.Attributes exposing (..)
-import List.Extra as LE exposing (init)
 
 
 main : Program Never Model Msg
@@ -17,16 +16,10 @@ main =
 
 
 type alias Model =
-    { processedNotes : List TabEntry
+    { processedNotes : List (List Tab)
     , enteredNotes : List String
     , tabXpos : Int
     , tabYpos : Int
-    }
-
-
-type alias TabEntry =
-    { fret : Int
-    , string : Int
     }
 
 
@@ -37,6 +30,16 @@ init =
     , tabYpos = 0
     }
         ! []
+
+
+type alias Tab =
+    { fret : Int
+    , string : Int
+    }
+
+
+type alias Chord =
+    List Tab
 
 
 type Msg
@@ -68,33 +71,50 @@ update msg model =
             { model | processedNotes = [] } ! []
 
 
+view : Model -> Html Msg
 view model =
     div [ style [ ( "color", "#fff" ) ] ]
         [ tabInput
         , button [ onClick ClearTab ] [ text "Delete All" ]
         , tabLines
         , tabNotes model.processedNotes
-        , div [ style [ ( "marginTop", "100px" ) ] ] [ text <| toString model.enteredNotes ]
         ]
 
 
+tabNotes : List (List Tab) -> Html Msg
 tabNotes tabList =
     let
-        tabHtmlList =
-            []
-
         tabItem a =
-            if a.fret == 50 then
-                div [ style [ ( "color", "rgba(0,0,0,0)" ) ] ] [ text "-" ]
-            else if a.string == 9 then
-                div [ style [ ( "height", "85px" ), ( "border", "1px solid #333" ), ( "zIndex", "1" ), ( "margin", "5px 5px 0 15px" ) ] ] []
+            if List.length a == 1 then
+                let
+                    note =
+                        List.head a
+                            |> Maybe.withDefault { fret = 0, string = 1 }
+                in
+                    if note.fret == 50 then
+                        div [ style [ ( "color", "rgba(0,0,0,0)" ) ] ] [ text "-" ]
+                    else if note.string == 9 then
+                        div [ style [ ( "height", "85px" ), ( "border", "1px solid #333" ), ( "zIndex", "1" ), ( "margin", "5px 5px 0 15px" ) ] ] []
+                    else
+                        div [ style [ ( "position", "relative" ), ( "marginTop", (noteXpos note.string) ), ( "marginLeft", "10px" ) ] ] [ text <| toString note.fret ]
             else
-                div [ style [ ( "position", "relative" ), ( "marginTop", (noteXpos a.string) ), ( "marginLeft", "10px" ) ] ] [ text <| toString a.fret ]
+                let
+                    mapper b =
+                        if b.fret == 50 then
+                            div [] []
+                        else
+                            div [ style [ ( "position", "absolute" ), ( "top", (noteXpos b.string) ), ( "left", "10px" ) ] ] [ text <| toString b.fret ]
+
+                    finalDiv =
+                        List.map mapper a
+                in
+                    div [ style [ ( "position", "relative" ) ] ] finalDiv
     in
         div [ style [ ( "display", "flex" ), ( "marginTop", "-100px" ) ] ]
             (List.map tabItem tabList)
 
 
+tabLines : Html Msg
 tabLines =
     div [ style [ ( "marginTop", "50px" ), ( "position", "relative" ) ] ]
         [ hr [ style [ ( "border", "1px solid #333" ), ( "marginTop", "15px" ) ] ] []
@@ -106,6 +126,7 @@ tabLines =
         ]
 
 
+tabInput : Html Msg
 tabInput =
     input
         [ type_ "text"
@@ -122,25 +143,56 @@ tabInput =
         []
 
 
+parseInput : List String -> List (List Tab)
 parseInput noteList =
     List.map splitNotes noteList
 
 
+splitNotes : String -> List Tab
 splitNotes note =
-    let
-        fretNo =
-            String.dropLeft 1 note
-                |> String.toInt
-                |> Result.withDefault 50
+    if String.length note == 12 then
+        let
+            e6 =
+                String.slice 0 2 note
 
-        stringNo =
-            String.left 1 note
-                |> String.toInt
-                |> Result.withDefault 0
-    in
-        TabEntry fretNo stringNo
+            a =
+                String.slice 2 4 note
+
+            d =
+                String.slice 4 6 note
+
+            g =
+                String.slice 6 8 note
+
+            b =
+                String.slice 8 10 note
+
+            e =
+                String.slice 10 12 note
+
+            mapper a =
+                Tab (fretNo a) (stringNo a)
+        in
+            List.map mapper [ e6, a, d, g, b, e ]
+    else
+        [ Tab (fretNo note) (stringNo note) ]
 
 
+fretNo : String -> Int
+fretNo a =
+    String.dropLeft 1 a
+        |> String.toInt
+        |> Result.withDefault 50
+
+
+stringNo : String -> Int
+stringNo a =
+    String.left 1 a
+        |> String.toInt
+        |> Result.withDefault 0
+
+
+noteXpos : Int -> String
 noteXpos a =
     case a of
         1 ->
