@@ -119,14 +119,18 @@ tabNotes tabList =
 
 tabLines : Html Msg
 tabLines =
-    div [ style [ ( "marginTop", "50px" ), ( "position", "relative" ) ] ]
-        [ hr [ style [ ( "border", "1px solid #333" ), ( "marginTop", "15px" ) ] ] []
-        , hr [ style [ ( "border", "1px solid #333" ), ( "marginTop", "15px" ) ] ] []
-        , hr [ style [ ( "border", "1px solid #333" ), ( "marginTop", "15px" ) ] ] []
-        , hr [ style [ ( "border", "1px solid #333" ), ( "marginTop", "15px" ) ] ] []
-        , hr [ style [ ( "border", "1px solid #333" ), ( "marginTop", "15px" ) ] ] []
-        , hr [ style [ ( "border", "1px solid #333" ), ( "marginTop", "15px" ) ] ] []
-        ]
+    let
+        lineStyle =
+            style [ ( "border", "1px solid #333" ), ( "marginTop", "15px" ) ]
+    in
+        div [ style [ ( "marginTop", "50px" ), ( "position", "relative" ) ] ]
+            [ hr [ lineStyle ] []
+            , hr [ lineStyle ] []
+            , hr [ lineStyle ] []
+            , hr [ lineStyle ] []
+            , hr [ lineStyle ] []
+            , hr [ lineStyle ] []
+            ]
 
 
 tabInput : Html Msg
@@ -184,6 +188,12 @@ splitNotes note =
                 Tab (fretNo a) (stringNo a)
         in
             List.map mapper [ e6, a, d, g, b, e ]
+    else if String.length note == 1 then
+        let
+            mapper a =
+                Tab (fretNo a) (stringNo a)
+        in
+            List.map mapper (chordTransform note)
     else
         [ Tab (fretNo note) (stringNo note) ]
 
@@ -227,12 +237,38 @@ noteXpos a =
             "0"
 
 
+chordTransform : String -> List String
+chordTransform note =
+    case note of
+        "G" ->
+            [ "63", "52", "40", "30", "23", "13" ]
+
+        "C" ->
+            [ "xx", "53", "42", "30", "21", "10" ]
+
+        "D" ->
+            [ "xx", "xx", "40", "32", "23", "12" ]
+
+        "A" ->
+            [ "xx", "50", "42", "32", "22", "10" ]
+
+        "a" ->
+            [ "xx", "50", "42", "32", "21", "10" ]
+
+        "e" ->
+            [ "60", "52", "42", "30", "20", "10" ]
+
+        _ ->
+            []
+
+
 instructions =
     ul [ style [ ( "position", "absolute" ), ( "bottom", "5%" ), ( "left", "25%" ), ( "width", "60%" ), ( "textAlign", "left" ), ( "color", "#333" ) ] ]
         [ li [] [ text "type string number directly followed by fret number, followed by a space, ex: 10 21 33 11, etc" ]
         , li [] [ text "type space as many times as desired to add spacing between notes." ]
         , li [] [ text "for chords type all 6 string number/fret number sets together. ex: G major = 635240302313" ]
         , li [] [ text "for chords with fewer than 6 strings use xx for string/fret. ex: D major = xxxx40322312" ]
+        , li [] [ text "OR... You can just enter a chord name: G fom G major; a for a minor." ]
         , li [] [ text "type 99 for a barline." ]
         , li [] [ text "type 88 for a double barline." ]
         , li [] [ text "Experimental, more coming soon!" ]
