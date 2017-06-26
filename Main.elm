@@ -73,7 +73,7 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div [ style [ ( "color", "#fff" ), ( "textAlign", "center" ) ] ]
+    div [ style [ ( "color", "#333" ), ( "textAlign", "center" ) ] ]
         [ tabInput
         , clearButton
         , tabLines
@@ -95,9 +95,9 @@ tabNotes tabList =
                     if note.fret == 50 then
                         div [ style [ ( "color", "rgba(0,0,0,0)" ) ] ] [ text "-" ]
                     else if note.string == 9 then
-                        div [ style [ ( "height", "85px" ), ( "border", "1px solid #333" ), ( "zIndex", "1" ), ( "margin", "5px 5px 0 15px" ) ] ] []
+                        div [ style [ ( "height", "85px" ), ( "border", "1px solid #aaa" ), ( "zIndex", "1" ), ( "margin", "5px 5px 0 15px" ) ] ] []
                     else if note.string == 8 then
-                        div [ style [ ( "height", "85px" ), ( "width", "3px" ), ( "borderLeft", "2px solid #333" ), ( "borderRight", "2px solid #333" ), ( "zIndex", "1" ), ( "margin", "5px 5px 0 15px" ) ] ] []
+                        div [ style [ ( "height", "85px" ), ( "width", "3px" ), ( "borderLeft", "2px solid #aaa" ), ( "borderRight", "2px solid #aaa" ), ( "zIndex", "1" ), ( "margin", "5px 5px 0 15px" ) ] ] []
                     else
                         div [ style [ ( "position", "relative" ), ( "marginTop", (noteXpos note.string) ), ( "marginLeft", "10px" ) ] ] [ text <| toString note.fret ]
             else
@@ -121,7 +121,7 @@ tabLines : Html Msg
 tabLines =
     let
         lineStyle =
-            style [ ( "border", "1px solid #333" ), ( "marginTop", "15px" ) ]
+            style [ ( "border", "1px solid #aaa" ), ( "marginTop", "15px" ) ]
     in
         div [ style [ ( "marginTop", "50px" ), ( "position", "relative" ) ] ]
             [ hr [ lineStyle ] []
@@ -143,9 +143,9 @@ tabInput =
             , ( "height", "100px" )
             , ( "textAlign", "center" )
             , ( "margin", "100px 20% 0" )
-            , ( "backgroundColor", "#111" )
+            , ( "backgroundColor", "#fff" )
             , ( "color", "#03a9f4" )
-            , ( "border", "1px solid #333" )
+            , ( "border", "1px solid #aaa" )
             , ( "fontSize", "16px" )
             ]
         ]
@@ -154,7 +154,7 @@ tabInput =
 
 clearButton : Html Msg
 clearButton =
-    button [ style [ ( "backgroundColor", "#222" ), ( "color", "#03a9f4" ), ( "border", "1px solid #333" ), ( "marginTop", "10px" ), ( "padding", "10px" ) ] ] [ text "Clear Tab" ]
+    button [ style [ ( "backgroundColor", "#ccc" ), ( "color", "#03a9f4" ), ( "border", "1px solid #aaa" ), ( "marginTop", "10px" ), ( "padding", "10px" ) ] ] [ text "Clear Tab" ]
 
 
 parseInput : List String -> List (List Tab)
