@@ -188,7 +188,7 @@ splitNotes note =
                 Tab (fretNo a) (stringNo a)
         in
             List.map mapper [ e6, a, d, g, b, e ]
-    else if String.length note == 1 then
+    else if String.length note == 1 || String.slice 1 2 note == "#" then
         let
             mapper a =
                 Tab (fretNo a) (stringNo a)
@@ -237,11 +237,22 @@ noteXpos a =
             "0"
 
 
+{-| Turns named chords (i.e. "G", "C", into Tab )
+-}
 chordTransform : String -> List String
 chordTransform note =
     case note of
-        "G" ->
-            [ "63", "52", "40", "30", "23", "13" ]
+        "A" ->
+            [ "xx", "50", "42", "32", "22", "10" ]
+
+        "a" ->
+            [ "xx", "50", "42", "32", "21", "10" ]
+
+        "B7" ->
+            [ "xx", "52", "41", "32", "20", "12" ]
+
+        "b" ->
+            [ "xx", "xx", "44", "34", "23", "12" ]
 
         "C" ->
             [ "xx", "53", "42", "30", "21", "10" ]
@@ -249,14 +260,23 @@ chordTransform note =
         "D" ->
             [ "xx", "xx", "40", "32", "23", "12" ]
 
-        "A" ->
-            [ "xx", "50", "42", "32", "22", "10" ]
-
-        "a" ->
-            [ "xx", "50", "42", "32", "21", "10" ]
+        "d" ->
+            [ "xx", "xx", "40", "32", "23", "11" ]
 
         "e" ->
             [ "60", "52", "42", "30", "20", "10" ]
+
+        "E" ->
+            [ "60", "52", "42", "31", "20", "10" ]
+
+        "F" ->
+            [ "xx", "xx", "43", "32", "21", "10" ]
+
+        "f#" ->
+            [ "62", "50", "40", "32", "22", "10" ]
+
+        "G" ->
+            [ "63", "52", "40", "30", "23", "13" ]
 
         _ ->
             []
