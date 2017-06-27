@@ -73,11 +73,12 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div [ style [ ( "color", "#fff" ), ( "textAlign", "center" ) ] ]
+    div [ style [ ( "color", "#333" ), ( "textAlign", "center" ) ] ]
         [ tabInput
         , clearButton
         , tabLines
         , tabNotes model.processedNotes
+        , instructions
         ]
 
 
@@ -94,7 +95,9 @@ tabNotes tabList =
                     if note.fret == 50 then
                         div [ style [ ( "color", "rgba(0,0,0,0)" ) ] ] [ text "-" ]
                     else if note.string == 9 then
-                        div [ style [ ( "height", "85px" ), ( "border", "1px solid #333" ), ( "zIndex", "1" ), ( "margin", "5px 5px 0 15px" ) ] ] []
+                        div [ style [ ( "height", "85px" ), ( "border", "1px solid #aaa" ), ( "zIndex", "1" ), ( "margin", "5px 5px 0 15px" ) ] ] []
+                    else if note.string == 8 then
+                        div [ style [ ( "height", "85px" ), ( "width", "3px" ), ( "borderLeft", "2px solid #aaa" ), ( "borderRight", "2px solid #aaa" ), ( "zIndex", "1" ), ( "margin", "5px 5px 0 15px" ) ] ] []
                     else
                         div [ style [ ( "position", "relative" ), ( "marginTop", (noteXpos note.string) ), ( "marginLeft", "10px" ) ] ] [ text <| toString note.fret ]
             else
@@ -103,12 +106,12 @@ tabNotes tabList =
                         if b.fret == 50 then
                             div [] []
                         else
-                            div [ style [ ( "margin", "-3px 0 0 10px" ) ] ] [ text <| toString b.fret ]
+                            div [ style [ ( "margin", "-1px 0 0 10px" ) ] ] [ text <| toString b.fret ]
 
                     finalDiv =
                         List.map mapper a
                 in
-                    div [ style [ ( "position", "relative" ) ] ] finalDiv
+                    div [ style [ ( "position", "relative" ) ] ] (List.reverse finalDiv)
     in
         div [ style [ ( "display", "flex" ), ( "marginTop", "-100px" ) ] ]
             (List.map tabItem tabList)
@@ -116,14 +119,18 @@ tabNotes tabList =
 
 tabLines : Html Msg
 tabLines =
-    div [ style [ ( "marginTop", "50px" ), ( "position", "relative" ) ] ]
-        [ hr [ style [ ( "border", "1px solid #333" ), ( "marginTop", "15px" ) ] ] []
-        , hr [ style [ ( "border", "1px solid #333" ), ( "marginTop", "15px" ) ] ] []
-        , hr [ style [ ( "border", "1px solid #333" ), ( "marginTop", "15px" ) ] ] []
-        , hr [ style [ ( "border", "1px solid #333" ), ( "marginTop", "15px" ) ] ] []
-        , hr [ style [ ( "border", "1px solid #333" ), ( "marginTop", "15px" ) ] ] []
-        , hr [ style [ ( "border", "1px solid #333" ), ( "marginTop", "15px" ) ] ] []
-        ]
+    let
+        lineStyle =
+            style [ ( "border", "1px solid #aaa" ), ( "marginTop", "15px" ) ]
+    in
+        div [ style [ ( "marginTop", "50px" ), ( "position", "relative" ) ] ]
+            [ hr [ lineStyle ] []
+            , hr [ lineStyle ] []
+            , hr [ lineStyle ] []
+            , hr [ lineStyle ] []
+            , hr [ lineStyle ] []
+            , hr [ lineStyle ] []
+            ]
 
 
 tabInput : Html Msg
@@ -136,9 +143,9 @@ tabInput =
             , ( "height", "100px" )
             , ( "textAlign", "center" )
             , ( "margin", "100px 20% 0" )
-            , ( "backgroundColor", "#111" )
+            , ( "backgroundColor", "#fff" )
             , ( "color", "#03a9f4" )
-            , ( "border", "1px solid #333" )
+            , ( "border", "1px solid #aaa" )
             , ( "fontSize", "16px" )
             ]
         ]
@@ -147,7 +154,7 @@ tabInput =
 
 clearButton : Html Msg
 clearButton =
-    button [ style [ ( "backgroundColor", "#222" ), ( "color", "#03a9f4" ), ( "border", "1px solid #333" ), ( "marginTop", "10px" ), ( "padding", "10px" ) ] ] [ text "Clear Tab" ]
+    button [ style [ ( "backgroundColor", "#ccc" ), ( "color", "#03a9f4" ), ( "border", "1px solid #aaa" ), ( "marginTop", "10px" ), ( "padding", "10px" ) ] ] [ text "Clear Tab" ]
 
 
 parseInput : List String -> List (List Tab)
@@ -181,6 +188,12 @@ splitNotes note =
                 Tab (fretNo a) (stringNo a)
         in
             List.map mapper [ e6, a, d, g, b, e ]
+    else if String.length note == 1 || String.slice 1 2 note == "#" then
+        let
+            mapper a =
+                Tab (fretNo a) (stringNo a)
+        in
+            List.map mapper (chordTransform note)
     else
         [ Tab (fretNo note) (stringNo note) ]
 
@@ -222,6 +235,64 @@ noteXpos a =
 
         _ ->
             "0"
+
+
+{-| Turns named chords (i.e. "G", "C", into Tab )
+-}
+chordTransform : String -> List String
+chordTransform note =
+    case note of
+        "A" ->
+            [ "xx", "50", "42", "32", "22", "10" ]
+
+        "a" ->
+            [ "xx", "50", "42", "32", "21", "10" ]
+
+        "B7" ->
+            [ "xx", "52", "41", "32", "20", "12" ]
+
+        "b" ->
+            [ "xx", "xx", "44", "34", "23", "12" ]
+
+        "C" ->
+            [ "xx", "53", "42", "30", "21", "10" ]
+
+        "D" ->
+            [ "xx", "xx", "40", "32", "23", "12" ]
+
+        "d" ->
+            [ "xx", "xx", "40", "32", "23", "11" ]
+
+        "e" ->
+            [ "60", "52", "42", "30", "20", "10" ]
+
+        "E" ->
+            [ "60", "52", "42", "31", "20", "10" ]
+
+        "F" ->
+            [ "xx", "xx", "43", "32", "21", "10" ]
+
+        "f#" ->
+            [ "62", "50", "40", "32", "22", "10" ]
+
+        "G" ->
+            [ "63", "52", "40", "30", "23", "13" ]
+
+        _ ->
+            []
+
+
+instructions =
+    ul [ style [ ( "position", "absolute" ), ( "bottom", "5%" ), ( "left", "25%" ), ( "width", "60%" ), ( "textAlign", "left" ), ( "color", "#333" ) ] ]
+        [ li [] [ text "type string number directly followed by fret number, followed by a space, ex: 10 21 33 11, etc" ]
+        , li [] [ text "type space as many times as desired to add spacing between notes." ]
+        , li [] [ text "for chords type all 6 string number/fret number sets together. ex: G major = 635240302313" ]
+        , li [] [ text "for chords with fewer than 6 strings use xx for string/fret. ex: D major = xxxx40322312" ]
+        , li [] [ text "OR... You can just enter a chord name: G fom G major; a for a minor." ]
+        , li [] [ text "type 99 for a barline." ]
+        , li [] [ text "type 88 for a double barline." ]
+        , li [] [ text "Experimental, more coming soon!" ]
+        ]
 
 
 subscriptions model =

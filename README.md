@@ -5,6 +5,7 @@
 * type `space` as many times as desired to add spacing between notes.
 * for chords type all 6 string number/fret number sets together.  ex: G major = `635240302313`
 * for chords with fewer than 6 strings use `xx` for string/fret.  ex: D major = `xxxx40322312`
+* OR... You can just enter a chord name: G fom G major; a for a minor.
 * type `99` for a barline.
 * Experimental, more coming soon!
 
