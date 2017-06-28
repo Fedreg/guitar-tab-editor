@@ -82,10 +82,13 @@ view model =
         ]
 
 
+{-| Takes in the list of notes that have been read in and processed and displays them as HTML.
+-}
 tabNotes : List (List Tab) -> Html Msg
 tabNotes tabList =
     let
         tabItem a =
+            -- Single note
             if List.length a == 1 then
                 let
                     note =
@@ -95,11 +98,23 @@ tabNotes tabList =
                     if note.fret == 50 then
                         div [ style [ ( "color", "rgba(0,0,0,0)" ) ] ] [ text "-" ]
                     else if note.string == 9 then
+                        -- single line / bar end
                         div [ style [ ( "height", "85px" ), ( "border", "1px solid #aaa" ), ( "zIndex", "1" ), ( "margin", "5px 5px 0 15px" ) ] ] []
                     else if note.string == 8 then
+                        -- double line
                         div [ style [ ( "height", "85px" ), ( "width", "3px" ), ( "borderLeft", "2px solid #aaa" ), ( "borderRight", "2px solid #aaa" ), ( "zIndex", "1" ), ( "margin", "5px 5px 0 15px" ) ] ] []
+                    else if note.fret == 51 then
+                        -- slur
+                        div [ style [ ( "transform", "rotate(-90deg) translateX(10px) translateY(6px)" ), ( "marginTop", (noteXpos note.string) ) ] ] [ text ")" ]
+                    else if note.fret == 52 then
+                        -- slide up
+                        div [ style [ ( "transform", "skewX(-45deg)" ), ( "margin", (noteXpos note.string) ++ " 0 0 10px" ) ] ] [ text "|" ]
+                    else if note.fret == 53 then
+                        -- slide down
+                        div [ style [ ( "transform", "skewX(45deg)" ), ( "margin", (noteXpos note.string) ++ " 0 0 10px" ) ] ] [ text "|" ]
                     else
                         div [ style [ ( "position", "relative" ), ( "marginTop", (noteXpos note.string) ), ( "marginLeft", "10px" ) ] ] [ text <| toString note.fret ]
+                -- Chord
             else
                 let
                     mapper b =
@@ -157,11 +172,15 @@ clearButton =
     button [ style [ ( "backgroundColor", "#ccc" ), ( "color", "#03a9f4" ), ( "border", "1px solid #aaa" ), ( "marginTop", "10px" ), ( "padding", "10px" ) ] ] [ text "Clear Tab" ]
 
 
+{-| Maps input over splitNotes to format
+-}
 parseInput : List String -> List (List Tab)
 parseInput noteList =
     List.map splitNotes noteList
 
 
+{-| Determines if note is a fret/string combo, a chord, or a special symbol and formats accordingly
+-}
 splitNotes : String -> List Tab
 splitNotes note =
     if String.length note == 12 then
@@ -198,6 +217,8 @@ splitNotes note =
         [ Tab (fretNo note) (stringNo note) ]
 
 
+{-| Takes in a 2 digit fret/string no and splits out just the fret
+-}
 fretNo : String -> Int
 fretNo a =
     String.dropLeft 1 a
@@ -205,6 +226,8 @@ fretNo a =
         |> Result.withDefault 50
 
 
+{-| Takes in a 2 digit fret/string no and splits out just the string
+-}
 stringNo : String -> Int
 stringNo a =
     String.left 1 a
@@ -282,6 +305,7 @@ chordTransform note =
             []
 
 
+instructions : Html msg
 instructions =
     ul [ style [ ( "position", "absolute" ), ( "bottom", "5%" ), ( "left", "25%" ), ( "width", "60%" ), ( "textAlign", "left" ), ( "color", "#333" ) ] ]
         [ li [] [ text "type string number directly followed by fret number, followed by a space, ex: 10 21 33 11, etc" ]
@@ -291,9 +315,11 @@ instructions =
         , li [] [ text "OR... You can just enter a chord name: G fom G major; a for a minor." ]
         , li [] [ text "type 99 for a barline." ]
         , li [] [ text "type 88 for a double barline." ]
+        , li [] [ text "type STRING 51 for a slur mark; 52 for / 53 for \\  So if I want forward slide on string 3, 352" ]
         , li [] [ text "Experimental, more coming soon!" ]
         ]
 
 
+subscriptions : a -> Sub msg
 subscriptions model =
     Sub.none
