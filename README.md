@@ -12,4 +12,9 @@
 * type STRING 54 for ascending bend, STRING 55 for descending.
 * Experimental, more coming soon!
 
-Example: `60 10 20 10 52 10 20 10 52 112 210 112 60 60 60`
+### Example output: 
+![screen shot 2017-06-27 at 4 47 13 pm](https://user-images.githubusercontent.com/17401067/27619652-b17d795c-5b89-11e7-8cbb-28df40a71329.png)
+![screen shot 2017-06-27 at 10 31 08 pm](https://user-images.githubusercontent.com/17401067/27619661-b6a8b09a-5b89-11e7-9123-8862dc27c534.png)
+![screen shot 2017-06-27 at 10 25 31 pm](https://user-images.githubusercontent.com/17401067/27619662-b7dc758c-5b89-11e7-90d4-d11877ad028e.png)
+
+
