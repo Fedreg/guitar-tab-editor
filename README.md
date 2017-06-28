@@ -7,6 +7,9 @@
 * for chords with fewer than 6 strings use `xx` for string/fret.  ex: D major = `xxxx40322312`
 * OR... You can just enter a chord name: G fom G major; a for a minor.
 * type `99` for a barline.
+* type `88` for double line.
+* type STRING 51 for a slur mark; 52 for / 53 for \  So if I want forward slide on string 3, `352`
+* type STRING 54 for ascending bend, STRING 55 for descending.
 * Experimental, more coming soon!
 
 Example: `60 10 20 10 52 10 20 10 52 112 210 112 60 60 60`
